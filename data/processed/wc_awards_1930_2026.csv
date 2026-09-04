@@ -1,0 +1,24 @@
+year,host,golden_ball_player,golden_ball_country,golden_boot_player,golden_boot_country,golden_boot_goals,golden_glove_player,golden_glove_country,silver_ball_player,silver_ball_country,bronze_ball_player,bronze_ball_country,silver_boot_player,silver_boot_country,silver_boot_goals,bronze_boot_player,bronze_boot_country,bronze_boot_goals,golden_ball_matches,golden_ball_assists,silver_ball_matches,silver_ball_assists,bronze_ball_matches,bronze_ball_assists,golden_boot_matches,silver_boot_matches,bronze_boot_matches,golden_glove_matches,golden_glove_clean_sheets,golden_glove_goals_conceded
+1930,Uruguay,José Nasazzi,Uruguay,Guillermo Stábile,Argentina,8,,,,,,,José Pedro Cea,Uruguay,5.0,Guillermo Subiabre,Chile,4.0,4,,,,,,4,4,3,,,
+1934,Italy,Giuseppe Meazza,Italy,Oldřich Nejedlý,Czechoslovakia,5,,,,,,,Edmund Conen,Germany,4.0,Angelo Schiavio,Italy,4.0,5,2.0,,,,,4,4,4,,,
+1938,France,Leônidas,Brazil,Leônidas,Brazil,8,,,,,,,György Sárosi,Hungary,5.0,Gyula Zsengellér,Hungary,5.0,4,,,,,,4,5,5,,,
+1950,Brazil,Zizinho,Brazil,Ademir,Brazil,9,,,,,,,Oscar Míguez,Uruguay,5.0,Chico,Brazil,4.0,4,3.0,,,,,6,5,4,,,
+1954,Switzerland,Ferenc Puskás,Hungary,Sándor Kocsis,Hungary,11,,,,,,,Josef Hügi,Switzerland,6.0,Max Morlock,West Germany,6.0,3,3.0,,,,,5,3,5,,,
+1958,Sweden,Didi,Brazil,Just Fontaine,France,13,,,,,,,Pelé,Brazil,6.0,Helmut Rahn,West Germany,6.0,6,6.0,,,,,6,4,6,,,
+1962,Chile,Garrincha,Brazil,Garrincha|Vavá|Flórián Albert|Valentin Ivanov|Dražan Jerković|Leonel Sánchez,Brazil|Brazil|Hungary|Soviet Union|Yugoslavia|Chile,4,,,,,,,,,,,,,6,3.0,,,,,,,,,,
+1966,England,Bobby Charlton,England,Eusébio,Portugal,9,,,,,,,Helmut Haller,West Germany,6.0,Valeriy Porkujan,Soviet Union,4.0,6,0.0,,,,,6,5,3,,,
+1970,Mexico,Pelé,Brazil,Gerd Müller,West Germany,10,,,,,,,Teófilo Cubillas,Peru,5.0,Pelé,Brazil,4.0,6,6.0,,,,,6,4,6,,,
+1974,West Germany,Johan Cruyff,Netherlands,Grzegorz Lato,Poland,7,,,,,,,Andrzej Szarmach,Poland,5.0,Johan Neeskens,Netherlands,5.0,7,3.0,,,,,7,6,7,,,
+1978,Argentina,Mario Kempes,Argentina,Mario Kempes,Argentina,6,,,,,,,Teófilo Cubillas,Peru,5.0,Rob Rensenbrink,Netherlands,5.0,7,1.0,,,,,7,6,7,,,
+1982,Spain,Paolo Rossi,Italy,Paolo Rossi,Italy,6,,,Falcão,Brazil,Karl-Heinz Rummenigge,West Germany,Karl-Heinz Rummenigge,West Germany,5.0,Zico,Brazil,4.0,7,1.0,5.0,1.0,7.0,1.0,7,7,6,,,
+1986,Mexico,Diego Maradona,Argentina,Gary Lineker,England,6,,,Harald Schumacher,West Germany,Preben Elkjær,Denmark,Diego Maradona / Careca,Argentina / Brazil,5.0,Emilio Butragueño,Spain,5.0,7,5.0,7.0,0.0,4.0,0.0,5,7 / 5,5,,,
+1990,Italy,Salvatore Schillaci,Italy,Salvatore Schillaci,Italy,6,,,Lothar Matthäus,West Germany,Diego Maradona,Argentina,Tomás Skuhravý,Czechoslovakia,5.0,Roger Milla / Gary Lineker,Cameroon / England,4.0,7,1.0,7.0,0.0,7.0,2.0,7,5,5 / 7,,,
+1994,United States,Romário,Brazil,Oleg Salenko & Hristo Stoichkov,Russia / Bulgaria,6,Michel Preud'homme,Belgium,Roberto Baggio,Italy,Hristo Stoichkov,Bulgaria,Kennet Andersson,Sweden,5.0,Romário,Brazil,5.0,7,3.0,7.0,0.0,7.0,1.0,3 / 7,7,7,4.0,2.0,4.0
+1998,France,Ronaldo,Brazil,Davor Šuker,Croatia,6,Fabien Barthez,France,Davor Šuker,Croatia,Lilian Thuram,France,Gabriel Batistuta,Argentina,5.0,Christian Vieri,Italy,5.0,7,3.0,7.0,0.0,6.0,0.0,7,5,5,7.0,5.0,2.0
+2002,South Korea/Japan,Oliver Kahn,Germany,Ronaldo,Brazil,8,Oliver Kahn,Germany,Oliver Kahn,Germany,Ronaldo,Brazil,Miroslav Klose,Germany,5.0,Rivaldo,Brazil,5.0,7,0.0,7.0,0.0,7.0,0.0,7,7,7,7.0,5.0,3.0
+2006,Germany,Zinedine Zidane,France,Miroslav Klose,Germany,5,Gianluigi Buffon,Italy,Fabio Cannavaro,Italy,Andrea Pirlo,Italy,Hernán Crespo,Argentina,3.0,Ronaldo,Brazil,3.0,6,1.0,7.0,0.0,7.0,3.0,7,5,5,7.0,5.0,2.0
+2010,South Africa,Diego Forlán,Uruguay,Thomas Müller,Germany,5,Iker Casillas,Spain,Wesley Sneijder,Netherlands,David Villa,Spain,David Villa,Spain,5.0,Wesley Sneijder,Netherlands,5.0,7,1.0,7.0,1.0,7.0,1.0,6,7,7,7.0,5.0,2.0
+2014,Brazil,Lionel Messi,Argentina,James Rodríguez,Colombia,6,Manuel Neuer,Germany,Thomas Müller,Germany,Arjen Robben,Netherlands,Thomas Müller,Germany,5.0,Neymar,Brazil,4.0,7,1.0,7.0,3.0,7.0,1.0,5,7,5,7.0,4.0,4.0
+2018,Russia,Luka Modrić,Croatia,Harry Kane,England,6,Thibaut Courtois,Belgium,Eden Hazard,Belgium,Antoine Griezmann,France,Antoine Griezmann,France,4.0,Romelu Lukaku,Belgium,4.0,7,1.0,6.0,2.0,7.0,2.0,6,7,6,7.0,3.0,6.0
+2022,Qatar,Lionel Messi,Argentina,Kylian Mbappé,France,8,Emiliano Martínez,Argentina,Kylian Mbappé,France,Luka Modrić,Croatia,Lionel Messi,Argentina,7.0,Olivier Giroud,France,4.0,7,3.0,7.0,2.0,7.0,0.0,7,7,7,7.0,3.0,8.0
+2026,Canada/Mexico/USA,Rodri,Spain,Kylian Mbappé,France,10,Unai Simón,Spain,Lionel Messi,Argentina,Kylian Mbappé,France,Lionel Messi,Argentina,8.0,Jude Bellingham,England,7.0,8,0.0,8.0,4.0,8.0,4.0,8,8,8,8.0,7.0,1.0

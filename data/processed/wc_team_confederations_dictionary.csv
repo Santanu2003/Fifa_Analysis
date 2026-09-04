@@ -1,0 +1,5 @@
+column,dtype,missing,unique
+team,object,0,93
+confederation,object,0,6
+continent,object,0,7
+note,object,91,2

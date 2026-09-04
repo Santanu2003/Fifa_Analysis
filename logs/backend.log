@@ -1,0 +1,12 @@
+INFO:     Started server process [14584]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:64538 - "GET /api/statistics/trends HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64541 - "GET /api/editions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64542 - "GET /api/leaders/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64543 - "GET /api/discipline/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64539 - "GET /api/statistics/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64540 - "GET /api/teams?limit=5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59660 - "GET /api/editions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59661 - "GET /api/discipline?limit=5000 HTTP/1.1" 200 OK

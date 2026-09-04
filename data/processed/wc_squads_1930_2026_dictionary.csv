@@ -1,0 +1,10 @@
+column,dtype,missing,unique
+tournament_year,int64,0,23
+tournament_name,object,0,23
+team,object,0,90
+team_code,object,0,99
+player_name,object,0,9339
+position,object,0,9
+age,float64,79,30
+birth_year,object,2,115
+goals,float64,0,13

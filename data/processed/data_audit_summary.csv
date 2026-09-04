@@ -1,0 +1,9 @@
+file,rows,columns,missing_cells,duplicate_rows,size_bytes
+wc_awards_1930_2026.csv,23,9,28,0,1771
+wc_editions_1930_2026.csv,23,21,0,0,3644
+wc_group_standings_1930_2026.csv,548,13,0,0,25939
+wc_match_discipline_1930_2026.csv,1068,14,208,0,72291
+wc_matches_1930_2026.csv,1068,25,5819,0,226987
+wc_squads_1930_2026.csv,12221,9,81,0,819352
+wc_team_confederations.csv,93,4,91,0,2583
+wc_top_scorers_1930_2026.csv,23,11,1,0,1509

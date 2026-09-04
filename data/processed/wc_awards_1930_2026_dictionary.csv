@@ -1,0 +1,10 @@
+column,dtype,missing,unique
+year,int64,0,23
+host,object,0,19
+golden_ball_player,object,0,22
+golden_ball_country,object,0,11
+golden_boot_player,object,0,22
+golden_boot_country,object,0,15
+golden_boot_goals,int64,0,9
+golden_glove_player,object,14,9
+golden_glove_country,object,14,6

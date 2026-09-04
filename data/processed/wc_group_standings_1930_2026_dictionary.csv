@@ -1,0 +1,15 @@
+column,dtype,missing,unique
+year,int64,0,21
+phase,str,0,5
+group,str,0,18
+group_rank,int64,0,4
+team,str,0,94
+played,int64,0,3
+won,int64,0,4
+drawn,int64,0,4
+lost,int64,0,4
+goals_for,int64,0,15
+goals_against,int64,0,16
+goal_diff,int64,0,26
+points,int64,0,9
+advanced,int64,0,2

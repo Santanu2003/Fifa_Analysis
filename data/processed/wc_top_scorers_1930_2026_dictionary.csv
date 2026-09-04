@@ -1,0 +1,12 @@
+column,dtype,missing,unique
+edition,int64,0,23
+year,int64,0,23
+player,object,0,22
+country,object,0,15
+position,object,0,1
+goals,int64,0,9
+assists,int64,0,4
+penalties,int64,0,2
+matches_played,int64,0,5
+host,object,0,19
+team_result,object,1,7

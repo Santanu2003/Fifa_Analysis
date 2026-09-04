@@ -1,0 +1,15 @@
+column,dtype,missing,unique
+year,int64,0,23
+date,object,0,412
+round,object,0,13
+home_team,object,0,89
+away_team,object,0,93
+home_yellow_cards,int64,0,9
+away_yellow_cards,int64,0,9
+home_red_cards,int64,0,2
+away_red_cards,int64,0,3
+home_second_yellow_reds,float64,104,2
+away_second_yellow_reds,float64,104,2
+data_available,bool,0,2
+total_yellow_cards,int64,0,16
+total_red_cards,int64,0,4

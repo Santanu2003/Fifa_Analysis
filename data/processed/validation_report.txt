@@ -1,0 +1,5 @@
+PASS: Edition uniqueness — duplicate years=0
+PASS: Match key uniqueness — compound match key
+PASS: Discipline joins matches — all discipline rows match a match key
+PASS: Match total goals — recomputed total_goals
+PASS: Group standings nonnegative — basic nonnegative check

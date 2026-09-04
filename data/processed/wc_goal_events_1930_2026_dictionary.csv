@@ -1,0 +1,11 @@
+column,dtype,missing,unique
+year,int64,0,23
+date,str,0,405
+round,str,0,9
+home_team,str,0,84
+away_team,str,0,90
+team,str,0,86
+player,str,0,1592
+minute,str,0,138
+minute_numeric,float64,0,122
+goal_type,str,0,3

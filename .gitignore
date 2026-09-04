@@ -5,3 +5,5 @@ dist/
 __pycache__/
 .venv/
 logs/
+node_modules/
+frontend/node_modules/

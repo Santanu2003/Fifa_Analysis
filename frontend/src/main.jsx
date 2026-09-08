@@ -1,7 +1,7 @@
 import React,{useEffect,useMemo,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {BrowserRouter,useNavigate,useLocation} from 'react-router-dom';
-import {Trophy,Globe2,Users,Goal,CalendarDays,Search,ArrowUpRight,Menu,X,ShieldCheck,Swords,Map,Medal,BarChart3,Zap} from 'lucide-react';
+import {Trophy,Globe2,Users,Goal,CalendarDays,Search,ArrowUpRight,Menu,X,ShieldCheck,Swords,Map,Medal,BarChart3,Zap,Clock} from 'lucide-react';
 import {LineChart,Line,BarChart,Bar,XAxis,YAxis,Tooltip,ResponsiveContainer,CartesianGrid,Legend,PieChart,Pie,Cell} from 'recharts';
 import './style.css';
 import trophyPhoto from './assets/trophy.jpg';
@@ -256,7 +256,9 @@ function Compare(){
     <Panel title="All-time profile">
       <Table headers={['Metric',a,b]} rows={A&&B?['appearances','titles','runner_up','third_place','fourth_place','matches','wins','draws','losses','goals_for','goals_against','win_percentage'].map(k=>{
         const va=+A[k]||0,vb=+B[k]||0;
-        return [k.replaceAll('_',' '),<b style={va>vb?{color:'#5fe3a1'}:undefined}>{A[k]??0}</b>,<b style={vb>va?{color:'#5fe3a1'}:undefined}>{B[k]??0}</b>];
+        const lowerIsBetter=k==='losses'||k==='goals_against';
+        const aWins=lowerIsBetter?va<vb:va>vb, bWins=lowerIsBetter?vb<va:vb>va;
+        return [k.replaceAll('_',' '),<b style={aWins?{color:'#5fe3a1'}:undefined}>{A[k]??0}</b>,<b style={bWins?{color:'#5fe3a1'}:undefined}>{B[k]??0}</b>];
       }):[]}/>
     </Panel>
     <Status loading={cmp.loading} error={cmp.error} retry={cmp.retry}/>
@@ -386,6 +388,11 @@ function GoalTimeline(){
     const opp=g.team===g.home_team?g.away_team:g.home_team;
     return `${g.player} · vs ${opp} · ${g.round} · ${g.year}`;
   },[s]);
+  const latestSub=useMemo(()=>{
+    const g=s?.latest_goal; if(!g)return undefined;
+    const opp=g.team===g.home_team?g.away_team:g.home_team;
+    return `${g.player} · vs ${opp} · ${g.round} · ${g.year}`;
+  },[s]);
   const groupKeys=isAll?[...new Set(rows.map(x=>x.year))].sort((a,b)=>b-a):[...new Set(rows.map(x=>x.round))];
   return <>
     <div className="filters">
@@ -401,6 +408,7 @@ function GoalTimeline(){
       <Stat icon={BarChart3} label="Penalties" value={s.by_type?.Penalty||0} accent="#f4c94f"/>
       <Stat icon={X} label="Own goals" value={s.by_type?.['Own Goal']||0} accent="#ff6b81"/>
       <Stat icon={Zap} label="Fastest goal" value={s.fastest_goal?`${s.fastest_goal.minute}'`:'—'} sub={fastestSub} accent="#5fe3a1"/>
+      <Stat icon={Clock} label="Latest goal" value={s.latest_goal?`${s.latest_goal.minute}'`:'—'} sub={latestSub} accent="#c893f5"/>
     </div>}
     <div className="grid2">
       <Panel title="When goals are scored">
@@ -426,7 +434,7 @@ function GoalTimeline(){
     <Status loading={listApi.loading} error={listApi.error} retry={listApi.retry} empty={!listApi.loading&&!listApi.error&&rows.length===0}/>
     {groupKeys.map(k=>{
       const krows=rows.filter(x=>isAll?x.year===k:x.round===k);
-      return <Panel key={k} title={`${k} · ${krows.length} goal${krows.length===1?'':'s'}`}>
+      return <Panel key={k} title={isAll?<span>{k}<span className="round-badge" style={{marginLeft:8,background:'#161d29',color:'#9aa5b5',border:'1px solid #2a3341'}}>{krows.length} goal{krows.length===1?'':'s'}</span></span>:<span><RoundBadge round={k}/> · {krows.length} goal{krows.length===1?'':'s'}</span>}>
         <Table headers={isAll?['Date','Round','Match','Scorer','Team','Minute','Type']:['Date','Match','Scorer','Team','Minute','Type']}
           rows={krows.map(x=>{const match=`${x.home_team} vs ${x.away_team}`;return isAll?[x.date,x.round,match,x.player,x.team,x.minute+"'",x.goal_type]:[x.date,match,x.player,x.team,x.minute+"'",x.goal_type];})}/>
       </Panel>;
@@ -772,59 +780,81 @@ function TeamCardCell({team,yellow,red}){
     {y===0&&r===0&&<span className="chip muted">Clean sheet</span>}
   </div></div>;
 }
+// Discipline: year dropdown now includes an "All Editions" option (like Matches/Goal
+// Timeline), paired with a team search box - so you can pull one team's discipline
+// record for a single edition (e.g. "Brazil" + "2014") or across every edition it has
+// played (e.g. "England" + "All Editions"). When "All Editions" is selected, the cards
+// chart groups by edition instead of by round (round only makes sense within one
+// tournament), and the match list groups by year instead of by round.
 function Discipline(){
   const editionsApi=useApi('/editions');
   const years=useMemo(()=>[...(editionsApi.data||[])].map(x=>x.year).sort((a,b)=>b-a),[editionsApi.data]);
   const{data,loading,error,retry}=useApi('/discipline?limit=5000'),[y,setY]=useState(null);
   useEffect(()=>{if(y===null&&years.length)setY(years.includes(2026)?2026:years[0])},[years,y]);
+  const[team,setTeam]=useState('');
+  const isAll=y==='all';
   const d=data||[];
-  const rows=d.filter(x=>!y||x.year===y);
+  const rows=useMemo(()=>{
+    const t=team.trim().toLowerCase();
+    return d.filter(x=>{
+      if(!isAll&&x.year!==y)return false;
+      if(!t)return true;
+      return String(x.home_team).toLowerCase().includes(t)||String(x.away_team).toLowerCase().includes(t);
+    });
+  },[d,y,isAll,team]);
   const totals=rows.reduce((a,x)=>{a.yellow+=(+x.total_yellow_cards||0);a.red+=(+x.total_red_cards||0);return a},{yellow:0,red:0});
   const mostCarded=useMemo(()=>rows.length?[...rows].sort((a,b)=>((+b.total_yellow_cards||0)+(+b.total_red_cards||0))-((+a.total_yellow_cards||0)+(+a.total_red_cards||0)))[0]:null,[rows]);
-  const roundKeys=[...new Set(rows.map(x=>x.round))];
-  const byRound=useMemo(()=>roundKeys.map(r=>{
-    const rr=rows.filter(x=>x.round===r);
-    return {round:r,yellow:rr.reduce((s,x)=>s+(+x.total_yellow_cards||0),0),red:rr.reduce((s,x)=>s+(+x.total_red_cards||0),0)};
-  }),[rows]);
+  const groupKeys=isAll?[...new Set(rows.map(x=>x.year))].sort((a,b)=>b-a):[...new Set(rows.map(x=>x.round))];
+  const byGroup=useMemo(()=>groupKeys.map(k=>{
+    const rr=rows.filter(x=>isAll?x.year===k:x.round===k);
+    return {label:k,yellow:rr.reduce((s,x)=>s+(+x.total_yellow_cards||0),0),red:rr.reduce((s,x)=>s+(+x.total_red_cards||0),0)};
+  }),[rows,groupKeys,isAll]);
   const byTeam=useMemo(()=>{
     const agg={};
-    const add=(team,yel,red)=>{
-      if(!team)return;
-      if(!agg[team])agg[team]={team,matches:0,yellow:0,red:0};
-      agg[team].matches+=1; agg[team].yellow+=(+yel||0); agg[team].red+=(+red||0);
+    const add=(t,yel,red)=>{
+      if(!t)return;
+      if(!agg[t])agg[t]={team:t,matches:0,yellow:0,red:0};
+      agg[t].matches+=1; agg[t].yellow+=(+yel||0); agg[t].red+=(+red||0);
     };
     rows.forEach(x=>{add(x.home_team,x.home_yellow_cards,x.home_red_cards);add(x.away_team,x.away_yellow_cards,x.away_red_cards)});
     return Object.values(agg).sort((a,b)=>(b.yellow+b.red)-(a.yellow+a.red));
   },[rows]);
   return <>
-    <div className="filters"><select value={y??''} onChange={e=>setY(+e.target.value)}>{years.map(yr=><option key={yr} value={yr}>{yr}</option>)}</select></div>
+    <div className="filters">
+      <select value={y??''} onChange={e=>setY(e.target.value==='all'?'all':+e.target.value)}>
+        <option value="all">All Editions</option>
+        {years.map(yr=><option key={yr} value={yr}>{yr}</option>)}
+      </select>
+      <input placeholder="Team (e.g. Brazil)" value={team} onChange={e=>setTeam(e.target.value)}/>
+    </div>
     <Status loading={loading||editionsApi.loading} error={error||editionsApi.error} retry={()=>{retry();editionsApi.retry()}} empty={!loading&&!error&&rows.length===0}/>
     {rows.length>0&&<div className="stats">
       <Stat icon={CalendarDays} label="Matches" value={rows.length} accent="#7dc4fa"/>
       <Stat icon={BarChart3} label="Yellow cards" value={totals.yellow} accent="#f4c94f"/>
       <Stat icon={X} label="Red cards" value={totals.red} accent="#ff6b81"/>
-      <Stat icon={Zap} label="Most-carded match" value={mostCarded?`${mostCarded.home_team} vs ${mostCarded.away_team}`:'—'} sub={mostCarded?`🟨 ${mostCarded.total_yellow_cards} · 🟥 ${mostCarded.total_red_cards}`:undefined} accent="#c893f5"/>
+      <Stat icon={Zap} label="Most-carded match" value={mostCarded?`${mostCarded.home_team} vs ${mostCarded.away_team}`:'—'} sub={mostCarded?`🟨 ${mostCarded.total_yellow_cards} · 🟥 ${mostCarded.total_red_cards}${isAll?` · ${mostCarded.year}`:''}`:undefined} accent="#c893f5"/>
     </div>}
-    <Panel title={`Cards by round · ${y}`}>
+    <Panel title={isAll?`Cards by edition${team?` · ${team}`:''}`:`Cards by round · ${y}`}>
       <ResponsiveContainer width="100%" height={280}>
-        <BarChart data={byRound}>
+        <BarChart data={byGroup}>
           <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="round" tick={{fontSize:11}}/><YAxis allowDecimals={false}/><Tooltip cursor={false}/><Legend/>
+          <XAxis dataKey="label" tick={{fontSize:11}}/><YAxis allowDecimals={false}/><Tooltip cursor={false}/><Legend/>
           <Bar dataKey="yellow" name="Yellow" fill="#f4c94f" radius={[4,4,0,0]} activeBar={{fill:'#eef3fb',stroke:'#f4c94f',strokeWidth:2}}/>
           <Bar dataKey="red" name="Red" fill="#ff6b81" radius={[4,4,0,0]} activeBar={{fill:'#eef3fb',stroke:'#ff6b81',strokeWidth:2}}/>
         </BarChart>
       </ResponsiveContainer>
     </Panel>
-    <Panel title={`Cards by team · ${y}`}>
+    <Panel title={isAll?`Cards by team${team?` matching "${team}"`:''}`:`Cards by team · ${y}`}>
       <Table headers={['Team','Matches','Yellow','Red','Total']} rows={byTeam.map(x=>[x.team,x.matches,x.yellow,x.red>0?<span style={{color:'#ff6b81',fontWeight:700}}>{x.red}</span>:0,x.yellow+x.red])}/>
     </Panel>
-    {roundKeys.map(r=>{
-      const rr=rows.filter(x=>x.round===r);
-      return <Panel key={r} title={<span><RoundBadge round={r}/> · {rr.length} match{rr.length===1?'':'es'}</span>}>
-        <Table headers={['Date','Home','Away']} rows={rr.map(x=>[x.date,
-          <TeamCardCell team={x.home_team} yellow={x.home_yellow_cards} red={x.home_red_cards}/>,
-          <TeamCardCell team={x.away_team} yellow={x.away_yellow_cards} red={x.away_red_cards}/>
-        ])}/>
+    {groupKeys.map(k=>{
+      const rr=rows.filter(x=>isAll?x.year===k:x.round===k);
+      return <Panel key={k} title={isAll?<span>{k}<span className="round-badge" style={{marginLeft:8,background:'#161d29',color:'#9aa5b5',border:'1px solid #2a3341'}}>{rr.length} match{rr.length===1?'':'es'}</span></span>:<span><RoundBadge round={k}/> · {rr.length} match{rr.length===1?'':'es'}</span>}>
+        <Table headers={isAll?['Date','Round','Home','Away']:['Date','Home','Away']} rows={rr.map(x=>{
+          const home=<TeamCardCell team={x.home_team} yellow={x.home_yellow_cards} red={x.home_red_cards}/>;
+          const away=<TeamCardCell team={x.away_team} yellow={x.away_yellow_cards} red={x.away_red_cards}/>;
+          return isAll?[x.date,x.round,home,away]:[x.date,home,away];
+        })}/>
       </Panel>;
     })}
   </>

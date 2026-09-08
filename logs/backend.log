@@ -10,3 +10,26 @@ INFO:     127.0.0.1:64539 - "GET /api/statistics/overview HTTP/1.1" 200 OK
 INFO:     127.0.0.1:64540 - "GET /api/teams?limit=5 HTTP/1.1" 200 OK
 INFO:     127.0.0.1:59660 - "GET /api/editions HTTP/1.1" 200 OK
 INFO:     127.0.0.1:59661 - "GET /api/discipline?limit=5000 HTTP/1.1" 200 OK
+INFO:     Started server process [18348]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:62466 - "GET /api/statistics/trends HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62467 - "GET /api/editions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62468 - "GET /api/discipline/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62471 - "GET /api/leaders/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62469 - "GET /api/statistics/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62470 - "GET /api/teams?limit=5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51123 - "GET /api/editions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60198 - "GET /api/goals/summary?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62784 - "GET /api/goals?year=2026&limit=3000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62785 - "GET /api/editions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52859 - "GET /api/matches?year=2026&limit=500 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52526 - "GET /api/leaders/goals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65130 - "GET /api/top-scorers?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65131 - "GET /api/leaders/assists-single-tournament HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65128 - "GET /api/leaders/assists HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65129 - "GET /api/teams HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65132 - "GET /api/players/by-country/Brazil HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55201 - "GET /api/editions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55202 - "GET /api/discipline?limit=5000 HTTP/1.1" 200 OK
